@@ -14,10 +14,11 @@ docker run --rm \
   --env HOME=/home/eval \
   "$image" \
   bash -euo pipefail -c '
-    for command in bash curl git jq node npm ps python3 rg codex claude; do
+    for command in bash curl git jq node npm ps python3 rg codex claude opencode; do
       command -v "$command" >/dev/null
     done
     test "$(id -u)" != 0
     codex --version
     claude --version
+    opencode --version
   '
