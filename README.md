@@ -2,11 +2,12 @@
 
 Reusable container foundations for Bloom evaluations. The initial
 `bloom-eval-agent-base` image provides the common command-line environment and
-preinstalls both agent runtimes used by the eval suite:
+preinstalls the agent runtimes used by the eval suite:
 
 - Node.js 22
 - OpenAI Codex CLI
 - Anthropic Claude Code
+- OpenCode
 - Bash, curl, Git, jq, OpenSSH, procps, Python 3, and ripgrep
 
 No credentials are stored in the image. Eval runners must inject agent
@@ -36,9 +37,9 @@ directly:
 docker_image = "ghcr.io/bloom-directory/bloom-eval-agent-base@sha256:<digest>"
 ```
 
-Harbor detects `codex` and `claude` on `PATH` and skips its runtime installers.
-The image is not Harbor-specific and can be used by any containerized eval
-runner.
+Harbor detects `codex`, `claude`, and `opencode` on `PATH` and skips its runtime
+installers. The image is not Harbor-specific and can be used by any
+containerized eval runner.
 
 ## Build and verify locally
 
@@ -60,6 +61,6 @@ After the first publish, set the GHCR package visibility to public so eval hosts
 can pull it without storing a registry credential. Keep the package private only
 if every eval environment is configured to authenticate to GHCR before launch.
 
-Codex and Claude Code versions are explicit build arguments in the Dockerfile.
-Update those defaults through review, run `make test`, and tag the repository to
-publish a release image.
+Codex, Claude Code, and OpenCode versions are explicit build arguments in the
+Dockerfile. Update those defaults through review, run `make test`, and tag the
+repository to publish a release image.
